@@ -1,31 +1,11 @@
+const W = 5;
+const H = 5;
 const width = 500;
 const height = 500;
-const nodes = [
-  { id: 0, x: 50, y: 250 },
-  { id: 1, x: 100, y: 100 },
-  { id: 2, x: 250, y: 80 },
-  { id: 3, x: 330, y: 90 },
-  { id: 4, x: 450, y: 280 },
-  { id: 5, x: 320, y: 350 },
-  { id: 6, x: 200, y: 390 },
-  { id: 7, x: 150, y: 300 },
-  { id: 8, x: 250, y: 180 },
-];
-const links = [
-  { source: nodes[0], target: nodes[1] },
-  { source: nodes[0], target: nodes[7] },
-  { source: nodes[1], target: nodes[2] },
-  { source: nodes[1], target: nodes[7] },
-  { source: nodes[2], target: nodes[3] },
-  { source: nodes[2], target: nodes[5] },
-  { source: nodes[2], target: nodes[8] },
-  { source: nodes[3], target: nodes[4] },
-  { source: nodes[3], target: nodes[5] },
-  { source: nodes[4], target: nodes[5] },
-  { source: nodes[5], target: nodes[6] },
-  { source: nodes[6], target: nodes[7] },
-  { source: nodes[7], target: nodes[8] },
-];
+
+const rawGraph = generateGraph(W, H);
+const nodes = flattenGraph(rawGraph.matrix);
+const links = flattenLinks(rawGraph.matrix, rawGraph.links);
 
 const graph = { nodes, links };
 

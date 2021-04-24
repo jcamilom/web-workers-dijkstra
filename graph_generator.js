@@ -1,39 +1,42 @@
 const PADDING = 50;
 
-function generateLinks(col, row, width, height, id) {
+function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded) {
   let links = [];
+  let rightBottomLinkAdded = false;
   if (col < width - 1) {
-    // Add rigth link
+    // Add right link
     links.push({ id: id + 1, i: col + 1, j: row });
-    // Add random rigth-bottom diagonal to 15% of the nodes
-    if (row < height - 1 && Math.random() > 0.8) {
+    // Add random right-bottom diagonal to 30% of the nodes
+    if (row < height - 1 && Math.random() > 0.7) {
       links.push({ id: id + width + 1, i: col + 1, j: row + 1 });
+      rightBottomLinkAdded = true;
     }
   }
   if (row < height - 1) {
     // Add bottom link
     links.push({ id: id + width, i: col, j: row + 1 });
-    // Add random left-bottom diagonal to 15% of the nodes
-    if (col > 0 && Math.random() > 0.8) {
+    // Add random left-bottom diagonal to 30% of the nodes
+    if (col > 0 && !previousRightBottomLinkAdded && Math.random() > 0.7) {
       links.push({ id: id + width - 1, i: col - 1, j: row + 1 });
     }
   }
-  return links;
+  return [links, rightBottomLinkAdded];
 }
 
 function generateGraph(width, height) {
   let matrix = new Array(height);
   let links = new Array(height);
+  let previousRightBottomLinkAdded = false;
   for (let j = 0; j < height; j++) {
     matrix[j] = new Array(width);
     links[j] = new Array(width);
     for (let i = 0; i < width; i++) {
       matrix[j][i] = {
         id: i + (j * width),
-        x: addRandomness((i * 100) + PADDING, 30),
-        y: addRandomness((j * 100) + PADDING, 30),
+        x: addRandomness((i * 100) + PADDING, 25),
+        y: addRandomness((j * 100) + PADDING, 25),
       };
-      links[j][i] = generateLinks(i, j, width, height, matrix[j][i].id);
+      [links[j][i], previousRightBottomLinkAdded] = generateLinks(i, j, width, height, matrix[j][i].id, previousRightBottomLinkAdded);
     }
   }
   return { matrix, links };

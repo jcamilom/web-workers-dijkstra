@@ -4,8 +4,8 @@ function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded
   let links = [];
   let rightBottomLinkAdded = false, rightLinkAdded = false;
   if (col < width - 1) {
-    // Add right link to 90% of the links
-    if (Math.random() < 0.9) {
+    // Add right link to 90% of the links. For the last row add it always
+    if ((row === height - 1) || Math.random() < 0.9) {
       links.push({ id: id + 1, i: col + 1, j: row });
       rightLinkAdded = true;
     }

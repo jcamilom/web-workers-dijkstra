@@ -2,10 +2,13 @@ const PADDING = 50;
 
 function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded) {
   let links = [];
-  let rightBottomLinkAdded = false;
+  let rightBottomLinkAdded = false, rightLinkAdded = false;
   if (col < width - 1) {
-    // Add right link
-    links.push({ id: id + 1, i: col + 1, j: row });
+    // Add right link to 90% of the links
+    if (Math.random() < 0.9) {
+      links.push({ id: id + 1, i: col + 1, j: row });
+      rightLinkAdded = true;
+    }
     // Add random right-bottom diagonal to 30% of the nodes
     if (row < height - 1 && Math.random() > 0.7) {
       links.push({ id: id + width + 1, i: col + 1, j: row + 1 });
@@ -13,8 +16,10 @@ function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded
     }
   }
   if (row < height - 1) {
-    // Add bottom link
-    links.push({ id: id + width, i: col, j: row + 1 });
+    // Add bottom link. Skip 10% only if node already has right link
+    if (!rightLinkAdded || (rightLinkAdded && Math.random() < 0.9)) {
+      links.push({ id: id + width, i: col, j: row + 1 });
+    }
     // Add random left-bottom diagonal to 30% of the nodes
     if (col > 0 && !previousRightBottomLinkAdded && Math.random() > 0.7) {
       links.push({ id: id + width - 1, i: col - 1, j: row + 1 });

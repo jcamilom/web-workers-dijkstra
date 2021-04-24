@@ -2,8 +2,22 @@ const PADDING = 50;
 
 function generateLinks(col, row, width, height, id) {
   let links = [];
-  if (col < width - 1) links.push({ id: id + 1, i: col + 1, j: row });
-  if (row < height - 1) links.push({ id: id + width, i: col, j: row + 1 });
+  if (col < width - 1) {
+    // Add rigth link
+    links.push({ id: id + 1, i: col + 1, j: row });
+    // Add random rigth-bottom diagonal to 15% of the nodes
+    if (row < height - 1 && Math.random() > 0.8) {
+      links.push({ id: id + width + 1, i: col + 1, j: row + 1 });
+    }
+  }
+  if (row < height - 1) {
+    // Add bottom link
+    links.push({ id: id + width, i: col, j: row + 1 });
+    // Add random left-bottom diagonal to 15% of the nodes
+    if (col > 0 && Math.random() > 0.8) {
+      links.push({ id: id + width - 1, i: col - 1, j: row + 1 });
+    }
+  }
   return links;
 }
 

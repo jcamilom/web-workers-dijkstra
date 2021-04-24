@@ -1,7 +1,7 @@
-const W = 5;
-const H = 5;
-const width = 500;
-const height = 500;
+const W = 10;
+const H = 10;
+const width = 1000;
+const height = 1000;
 
 const rawGraph = generateGraph(W, H);
 const nodes = flattenGraph(rawGraph.matrix);

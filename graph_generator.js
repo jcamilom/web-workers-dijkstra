@@ -1,4 +1,4 @@
-const PADDING = 15;
+const PADDING = 50;
 
 function generateLinks(col, row, width, height, id) {
   let links = [];
@@ -16,8 +16,8 @@ function generateGraph(width, height) {
     for (let i = 0; i < width; i++) {
       matrix[j][i] = {
         id: i + (j * width),
-        x: (i * 100) + PADDING,
-        y: (j * 100) + PADDING,
+        x: addRandomness((i * 100) + PADDING, 30),
+        y: addRandomness((j * 100) + PADDING, 30),
       };
       links[j][i] = generateLinks(i, j, width, height, matrix[j][i].id);
     }
@@ -47,5 +47,11 @@ function flattenLinks(matrix, links) {
     }
   }
   return flatLinks;
+}
+
+// add random between -30 and 30
+function addRandomness(value, max) {
+  const rand = (Math.random() - 0.5) * 2; // random between -1 and 1
+  return value + Math.floor(rand * max);
 }
 

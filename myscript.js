@@ -7,6 +7,10 @@ const rawGraph = generateGraph(W, H);
 const nodes = flattenGraph(rawGraph.matrix);
 const links = flattenLinks(rawGraph.matrix, rawGraph.links);
 
+const source = 4;
+const target = 2;
+const shortestPath = shortestPathDijkstra(rawGraph, source, target)
+
 const graph = { nodes, links };
 
 const svg = d3.select('body')

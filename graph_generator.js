@@ -9,7 +9,7 @@ function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded
       links.push({ id: id + 1, i: col + 1, j: row });
       rightLinkAdded = true;
     }
-    // Add random right-bottom diagonal to 30% of the nodes
+    // Add right-bottom diagonal to 30% of the nodes
     if (row < height - 1 && Math.random() > 0.7) {
       links.push({ id: id + width + 1, i: col + 1, j: row + 1 });
       rightBottomLinkAdded = true;
@@ -20,7 +20,7 @@ function generateLinks(col, row, width, height, id, previousRightBottomLinkAdded
     if (!rightLinkAdded || (rightLinkAdded && Math.random() < 0.9)) {
       links.push({ id: id + width, i: col, j: row + 1 });
     }
-    // Add random left-bottom diagonal to 30% of the nodes
+    // Add left-bottom diagonal to 30% of the nodes
     if (col > 0 && !previousRightBottomLinkAdded && Math.random() > 0.7) {
       links.push({ id: id + width - 1, i: col - 1, j: row + 1 });
     }

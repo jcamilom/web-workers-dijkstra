@@ -7,3 +7,7 @@
   stroke: #000;
   stroke-width: 1.5px;
 }
+.link.shortest {
+  stroke: rgb(0, 47, 255);
+  stroke-width: 5px;
+}

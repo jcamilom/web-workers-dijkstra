@@ -25,7 +25,8 @@ const link = svg
     .attr('y1', d => d.source.y)
     .attr('x2', d => d.target.x)
     .attr('y2', d => d.target.y)
-    .classed('link', true);
+    .classed('link', true)
+    .classed('shortest', d => (shortestPath.includes(d.source.id) && shortestPath.includes(d.target.id)));
 const node = svg
   .selectAll('.node')
   .data(graph.nodes)

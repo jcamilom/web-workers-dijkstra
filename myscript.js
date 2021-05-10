@@ -7,8 +7,8 @@ const rawGraph = generateGraph(W, H);
 const nodes = flattenGraph(rawGraph.matrix);
 const links = flattenLinks(rawGraph.matrix, rawGraph.links);
 
-const source = 4;
-const target = 2;
+const source = 32;
+const target = 88;
 const shortestPath = shortestPathDijkstra(rawGraph, source, target)
 
 const graph = { nodes, links };

@@ -121,7 +121,5 @@ function shortestPathDijkstra(fancyGraph, source, target) {
   const rawGraph = transformToRawGraph(flattenFancyGraph);
   const { distances, previous } = dijkstra(rawGraph, source, target);
   const shortestPath = extractShortestPath(source, target, previous);
-  console.log('distances trunc', distances)
-  console.log(`shortestPath from ${source} to ${target}`, shortestPath);
   return shortestPath;
 }

@@ -1,13 +1,16 @@
+body {
+  background-color: #181a1b;
+}
 .node {
-  fill: #ccc;
-  stroke: #000;
+  fill: #c8c3bc;
+  stroke: #e8e6e3;
   stroke-width: 1.5px;
 }
 .link {
-  stroke: #000;
+  stroke: #e8e6e3;
   stroke-width: 1.5px;
 }
 .link.shortest {
-  stroke: rgb(0, 47, 255);
+  stroke: #338bff;
   stroke-width: 5px;
 }

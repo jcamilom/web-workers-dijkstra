@@ -48,18 +48,24 @@ function submitNodesForm(e) {
   e.preventDefault()
   const sorceInnput = document.getElementById('sourceInput');
   const targetInnput = document.getElementById('targetInput');
-  source = +sorceInnput.value;
-  target = +targetInnput.value;
+  const sourceValue = +sorceInnput.value;
+  const targetValue = +targetInnput.value;
+  if ((sourceValue < 0 || sourceValue > N_NODES) || (targetValue < 0 || targetValue > N_NODES)) {
+    setInputsValue(source, target);
+    return;
+  }
+  source = sourceValue;
+  target = targetValue;
   shortestPath = shortestPathDijkstra(rawGraph, source, target);
   drawGraph();
 }
 
-function initInputs(source, target) {
+function setInputsValue(source, target) {
   const sorceInnput = document.getElementById('sourceInput');
   const targetInnput = document.getElementById('targetInput');
   sorceInnput.value = source;
   targetInnput.value = target;
 }
 
-initInputs(source, target);
+setInputsValue(source, target);
 drawGraph();

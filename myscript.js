@@ -1,7 +1,9 @@
-const W = 10;
-const H = 10;
-const width = 1000;
-const height = 1000;
+const svgWidth=500;
+const svgHeight=500;
+const W = 20;
+const H = 20;
+const width = 2000;
+const height = 2000;
 const N_NODES = W * H;
 
 const rawGraph = generateGraph(W, H);
@@ -14,11 +16,18 @@ let shortestPath = shortestPathDijkstra(rawGraph, source, target);
 
 const graph = { nodes, links };
 
+function initGraph() {
+  const svg = d3.select('.svg')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight)
+    .attr('viewBox', [0, 0, width, height]);
+  const g = svg.append('g');
+}
+
 function drawGraph() {
   const svg = d3.select('.svg')
-    .attr('width', width)
-    .attr('height', height);
-  const link = svg
+  const g = svg.select('g');
+  const link = g
     .selectAll('.link')
     .data(graph.links)
     .join('line')
@@ -28,7 +37,7 @@ function drawGraph() {
       .attr('y2', d => d.target.y)
       .classed('link', true)
       .classed('shortest', d => (shortestPath.includes(d.source.id) && shortestPath.includes(d.target.id)));
-  const node = svg
+  const node = g
     .selectAll('.node')
     .data(graph.nodes)
     .join('circle')
@@ -36,6 +45,15 @@ function drawGraph() {
       .attr('cy', function (d, i) { return d.y; })
       .attr('cx', function (d, i) { return d.x; })
       .classed('node', true);
+
+  svg.call(d3.zoom()
+    .extent([[0, 0], [width, height]])
+    .scaleExtent([1, 8])
+    .on('zoom', zoomed))
+
+  function zoomed({transform}) {
+    g.attr('transform', transform);
+  }
 }
 
 function getRandomInt(min, max) {
@@ -68,4 +86,5 @@ function setInputsValue(source, target) {
 }
 
 setInputsValue(source, target);
+initGraph();
 drawGraph();

@@ -9,12 +9,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <form onsubmit="submitNodesForm(event)">
-    Source: <input type="number" id="sourceInput">
-    Target: <input type="number" id="targetInput">
-    <button role="submit">Find!</button>
-  </form>
-  <svg class="svg"></svg>
+  <div class="container">
+    <form onsubmit="submitNodesForm(event)">
+      Source: <input type="number" id="sourceInput">
+      Target: <input type="number" id="targetInput">
+      <button role="submit">Find!</button>
+    </form>
+    <svg class="svg"></svg>
+  </div>
   <script type="text/javascript" src="graph_generator.js"></script>
   <script type="text/javascript" src="graphTransformer.js"></script>
   <script type="text/javascript" src="dijkstra.js"></script>

@@ -1,6 +1,14 @@
 body {
   background-color: #181a1b;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container > form {
+  margin: 15px;
+}
 .node {
   fill: #c8c3bc;
   stroke: #e8e6e3;

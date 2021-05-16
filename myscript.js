@@ -1,5 +1,3 @@
-const svgWidth=500;
-const svgHeight=500;
 const W = 20;
 const H = 20;
 const width = 2000;
@@ -18,8 +16,6 @@ const graph = { nodes, links };
 
 function initGraph() {
   const svg = d3.select('.svg')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight)
     .attr('viewBox', [0, 0, width, height]);
   const g = svg.append('g');
 }
@@ -83,7 +79,7 @@ if (window.Worker) {
     const targetInnput = document.getElementById('targetInput');
     const sourceValue = +sorceInnput.value;
     const targetValue = +targetInnput.value;
-    if ((sourceValue < 0 || sourceValue > N_NODES) || (targetValue < 0 || targetValue > N_NODES)) {
+    if ((sourceValue < 0 || sourceValue >= N_NODES) || (targetValue < 0 || targetValue >= N_NODES)) {
       setInputsValue(source, target);
       return;
     }

@@ -1,3 +1,5 @@
+importScripts('graphTransformer.js'); 
+
 /**
  * Output example
  * [
@@ -122,4 +124,10 @@ function shortestPathDijkstra(fancyGraph, source, target) {
   const { distances, previous } = dijkstra(rawGraph, source, target);
   const shortestPath = extractShortestPath(source, target, previous);
   return shortestPath;
+}
+
+onmessage = function(e) {
+  const [graph, source, target] = e.data;
+  const shortestPath = shortestPathDijkstra(graph, source, target)
+  postMessage(shortestPath);
 }

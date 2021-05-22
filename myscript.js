@@ -1,20 +1,20 @@
 const width = 2000;
 const height = 2000;
-let GRID_SIZE = 20;
-let N_NODES, rawGraph, nodes, links, source, target, shortestPath, graph;
+let gridSize = 20;
+let nNodes, rawGraph, nodes, links, source, target, shortestPath, graph;
 
 function createGraphStructure() {
-  N_NODES = GRID_SIZE * GRID_SIZE;
-  const W = GRID_SIZE;
-  const H = GRID_SIZE;
+  nNodes = gridSize * gridSize;
+  const W = gridSize;
+  const H = gridSize;
   rawGraph = generateGraph(W, H);
   nodes = flattenGraph(rawGraph.matrix);
   links = flattenLinks(rawGraph.matrix, rawGraph.links);
-  
-  source = getRandomInt(0, N_NODES - 1);
-  target = getRandomInt(0, N_NODES - 1);
+
+  source = getRandomInt(0, nNodes - 1);
+  target = getRandomInt(0, nNodes - 1);
   shortestPath = [];
-  
+
   graph = { nodes, links };
 }
 
@@ -62,11 +62,13 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-function setInputsValue(source, target) {
+function setInputsValue(source, target, gridSize) {
   const sorceInnput = document.getElementById('sourceInput');
   const targetInnput = document.getElementById('targetInput');
+  const sizeInnput = document.getElementById('sizeInput');
   sorceInnput.value = source;
   targetInnput.value = target;
+  sizeInnput.value = gridSize;
 }
 
 function setLoader(state) {
@@ -75,8 +77,8 @@ function setLoader(state) {
   spinner.classList[action]('show');
 }
 
-createGraphStructure()
-setInputsValue(source, target);
+createGraphStructure();
+setInputsValue(source, target, gridSize);
 initGraph();
 
 if (window.Worker) {
@@ -86,17 +88,23 @@ if (window.Worker) {
 
   form.onsubmit = function(e) {
     e.preventDefault()
-    const sorceInnput = document.getElementById('sourceInput');
-    const targetInnput = document.getElementById('targetInput');
-    const sourceValue = +sorceInnput.value;
-    const targetValue = +targetInnput.value;
-    if ((sourceValue < 0 || sourceValue >= N_NODES) || (targetValue < 0 || targetValue >= N_NODES)) {
-      setInputsValue(source, target);
+    setLoader(true);
+    const sorceInput = document.getElementById('sourceInput');
+    const targetInput = document.getElementById('targetInput');
+    const sizeInput = document.getElementById('sizeInput');
+    const sourceValue = +sorceInput.value;
+    const targetValue = +targetInput.value;
+    const sizeValue = +sizeInput.value;
+    if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
+      setInputsValue(source, target, gridSize); // TODO: Add validator for size
       return;
+    }
+    if (sizeValue !== gridSize) {
+      gridSize = sizeValue;
+      createGraphStructure();
     }
     source = sourceValue;
     target = targetValue;
-    setLoader(true);
     dijkstraWorker.postMessage([rawGraph, source, target]);
   }
 

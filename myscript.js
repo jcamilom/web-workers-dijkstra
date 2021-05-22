@@ -1,18 +1,22 @@
-const W = 20;
-const H = 20;
 const width = 2000;
 const height = 2000;
-const N_NODES = W * H;
+let GRID_SIZE = 20;
+let N_NODES, rawGraph, nodes, links, source, target, shortestPath, graph;
 
-const rawGraph = generateGraph(W, H);
-const nodes = flattenGraph(rawGraph.matrix);
-const links = flattenLinks(rawGraph.matrix, rawGraph.links);
-
-let source = getRandomInt(0, N_NODES - 1);
-let target = getRandomInt(0, N_NODES - 1);
-let shortestPath = [];
-
-const graph = { nodes, links };
+function createGraphStructure() {
+  N_NODES = GRID_SIZE * GRID_SIZE;
+  const W = GRID_SIZE;
+  const H = GRID_SIZE;
+  rawGraph = generateGraph(W, H);
+  nodes = flattenGraph(rawGraph.matrix);
+  links = flattenLinks(rawGraph.matrix, rawGraph.links);
+  
+  source = getRandomInt(0, N_NODES - 1);
+  target = getRandomInt(0, N_NODES - 1);
+  shortestPath = [];
+  
+  graph = { nodes, links };
+}
 
 function initGraph() {
   const svg = d3.select('.svg')
@@ -71,6 +75,7 @@ function setLoader(state) {
   spinner.classList[action]('show');
 }
 
+createGraphStructure()
 setInputsValue(source, target);
 initGraph();
 

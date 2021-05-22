@@ -65,6 +65,12 @@ function setInputsValue(source, target) {
   targetInnput.value = target;
 }
 
+function setLoader(state) {
+  const spinner = document.getElementById('spinner');
+  const action = state ? 'add' : 'remove';
+  spinner.classList[action]('show');
+}
+
 setInputsValue(source, target);
 initGraph();
 
@@ -85,14 +91,17 @@ if (window.Worker) {
     }
     source = sourceValue;
     target = targetValue;
+    setLoader(true);
     dijkstraWorker.postMessage([rawGraph, source, target]);
   }
 
   dijkstraWorker.onmessage = function(e) {
     shortestPath = e.data;
     updateGraph();
+    setLoader(false);
   }
 
+  setLoader(true);
   dijkstraWorker.postMessage([rawGraph, source, target]);
 
 } else {

@@ -11,6 +11,7 @@ body {
 .container > form {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   min-height: 50px;
   margin: 15px;
 }

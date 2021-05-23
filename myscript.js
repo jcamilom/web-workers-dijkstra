@@ -1,6 +1,5 @@
-const width = 2000;
-const height = 2000;
-let gridSize = 20;
+let gridSize = 30;
+let width, height;
 let nNodes, rawGraph, nodes, links, source, target, shortestPath, graph;
 
 nNodes = gridSize * gridSize;
@@ -18,13 +17,15 @@ function createGraphStructure() {
 }
 
 function initGraph() {
-  const svg = d3.select('.svg')
-    .attr('viewBox', [0, 0, width, height]);
+  const svg = d3.select('.svg');
   const g = svg.append('g');
 }
 
 function updateGraph() {
+  width = gridSize * 100;
+  height = gridSize * 100;
   const svg = d3.select('.svg')
+    .attr('viewBox', [0, 0, width, height]);
   const g = svg.select('g');
   const link = g
     .selectAll('.link')

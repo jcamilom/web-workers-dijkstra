@@ -3,18 +3,17 @@ const height = 2000;
 let gridSize = 20;
 let nNodes, rawGraph, nodes, links, source, target, shortestPath, graph;
 
+nNodes = gridSize * gridSize;
+source = getRandomInt(0, nNodes - 1);
+target = getRandomInt(0, nNodes - 1);
+shortestPath = [];
+
 function createGraphStructure() {
-  nNodes = gridSize * gridSize;
   const W = gridSize;
   const H = gridSize;
   rawGraph = generateGraph(W, H);
   nodes = flattenGraph(rawGraph.matrix);
   links = flattenLinks(rawGraph.matrix, rawGraph.links);
-
-  source = getRandomInt(0, nNodes - 1);
-  target = getRandomInt(0, nNodes - 1);
-  shortestPath = [];
-
   graph = { nodes, links };
 }
 
@@ -95,16 +94,25 @@ if (window.Worker) {
     const sourceValue = +sorceInput.value;
     const targetValue = +targetInput.value;
     const sizeValue = +sizeInput.value;
-    if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
-      setInputsValue(source, target, gridSize); // TODO: Add validator for size
-      return;
-    }
     if (sizeValue !== gridSize) {
       gridSize = sizeValue;
+      nNodes = gridSize * gridSize;
       createGraphStructure();
+      if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
+        source = getRandomInt(0, nNodes - 1);
+        target = getRandomInt(0, nNodes - 1);
+        setInputsValue(source, target, gridSize);
+      } else {
+        source = sourceValue;
+        target = targetValue;
+      }
+    } else if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
+      setInputsValue(source, target, gridSize);
+      return;
+    } else {
+      source = sourceValue;
+      target = targetValue;
     }
-    source = sourceValue;
-    target = targetValue;
     dijkstraWorker.postMessage([rawGraph, source, target]);
   }
 

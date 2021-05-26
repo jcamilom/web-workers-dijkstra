@@ -80,6 +80,7 @@ function setLoader(state) {
 createGraphStructure();
 setInputsValue(source, target, gridSize);
 initGraph();
+updateGraph();
 
 if (window.Worker) {
   const dijkstraWorker = new Worker('dijkstra.js');

@@ -56,6 +56,10 @@ function updateGraph() {
   }
 }
 
+function clearGraph() {
+  shortestPath = [];
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -80,6 +84,7 @@ function setLoader(state) {
 createGraphStructure();
 setInputsValue(source, target, gridSize);
 initGraph();
+clearGraph();
 updateGraph();
 
 if (window.Worker) {
@@ -108,6 +113,8 @@ if (window.Worker) {
         source = sourceValue;
         target = targetValue;
       }
+      clearGraph();
+      updateGraph();
     } else if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
       setInputsValue(source, target, gridSize);
       return;

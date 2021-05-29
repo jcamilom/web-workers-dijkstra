@@ -1,11 +1,10 @@
 let gridSize = 30;
 let width, height;
-let nNodes, rawGraph, nodes, links, source, target, shortestPath, graph;
+let nNodes, rawGraph, nodes, links, source, target, shortestPath, visited, graph;
 
 nNodes = gridSize * gridSize;
 source = getRandomInt(0, nNodes - 1);
 target = getRandomInt(0, nNodes - 1);
-shortestPath = [];
 
 function createGraphStructure() {
   const W = gridSize;
@@ -27,24 +26,8 @@ function updateGraph() {
   const svg = d3.select('.svg')
     .attr('viewBox', [0, 0, width, height]);
   const g = svg.select('g');
-  const link = g
-    .selectAll('.link')
-    .data(graph.links)
-    .join('line')
-      .attr('x1', d => d.source.x)
-      .attr('y1', d => d.source.y)
-      .attr('x2', d => d.target.x)
-      .attr('y2', d => d.target.y)
-      .classed('link', true)
-      .classed('shortest', d => (shortestPath.includes(d.source.id) && shortestPath.includes(d.target.id)));
-  const node = g
-    .selectAll('.node')
-    .data(graph.nodes)
-    .join('circle')
-      .attr('r', 10)
-      .attr('cy', function (d, i) { return d.y; })
-      .attr('cx', function (d, i) { return d.x; })
-      .classed('node', true);
+  updateLinks();
+  updateNodes();
 
   svg.call(d3.zoom()
     .extent([[0, 0], [width, height]])
@@ -56,8 +39,36 @@ function updateGraph() {
   }
 }
 
+function updateLinks() {
+  d3.select('.svg')
+    .select('g')
+    .selectAll('.link')
+    .data(graph.links)
+    .join('line')
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y)
+      .classed('link', true)
+      .classed('shortest', d => (shortestPath.includes(d.source.id) && shortestPath.includes(d.target.id)));
+}
+
+function updateNodes() {
+  d3.select('.svg')
+    .select('g')
+    .selectAll('.node')
+    .data(graph.nodes)
+    .join('circle')
+      .attr('r', 10)
+      .attr('cy', function (d, i) { return d.y; })
+      .attr('cx', function (d, i) { return d.x; })
+      .classed('node', true)
+      .classed('visited', d => visited.includes(d.id));
+}
+
 function clearGraph() {
   shortestPath = [];
+  visited = [];
 }
 
 function getRandomInt(min, max) {
@@ -127,7 +138,10 @@ if (window.Worker) {
 
   dijkstraWorker.onmessage = function(e) {
     const { data } = e;
-    if (data.id === 'finished') {
+    if (data.id === 'added') {
+      visited = data.visited;
+      updateNodes();
+    } else if (data.id === 'finished') {
       shortestPath = data.path;
       updateGraph();
       setLoader(false);

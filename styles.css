@@ -24,12 +24,15 @@ body {
   stroke: #e8e6e3;
   stroke-width: 1.5px;
 }
+.node.visited {
+  fill: #338bff;
+}
 .link {
   stroke: #e8e6e3;
   stroke-width: 1.5px;
 }
 .link.shortest {
-  stroke: #338bff;
+  stroke: #ffa732;
   stroke-width: 5px;
 }
 

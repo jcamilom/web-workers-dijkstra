@@ -87,6 +87,10 @@ function dijkstra(graph, source, target) {
   while (unvisited.length !== 0) {
     const u = findMinDistance(distances, unvisited);
     visited.push(u);
+    postMessage({
+      id: 'added',
+      visited,
+    });
     const idxToRemove = unvisited.findIndex(v => v === u);
     unvisited.splice(idxToRemove, 1);
     if (u === target) break;

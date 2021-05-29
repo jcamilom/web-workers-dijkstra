@@ -126,9 +126,12 @@ if (window.Worker) {
   }
 
   dijkstraWorker.onmessage = function(e) {
-    shortestPath = e.data;
-    updateGraph();
-    setLoader(false);
+    const { data } = e;
+    if (data.id === 'finished') {
+      shortestPath = data.path;
+      updateGraph();
+      setLoader(false);
+    }
   }
 
   setLoader(true);

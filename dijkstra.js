@@ -129,5 +129,8 @@ function shortestPathDijkstra(fancyGraph, source, target) {
 onmessage = function(e) {
   const [graph, source, target] = e.data;
   const shortestPath = shortestPathDijkstra(graph, source, target)
-  postMessage(shortestPath);
+  postMessage({
+    id: 'finished',
+    path: shortestPath,
+  });
 }

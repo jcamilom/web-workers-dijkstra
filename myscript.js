@@ -63,7 +63,9 @@ function updateNodes() {
       .attr('cy', function (d, i) { return d.y; })
       .attr('cx', function (d, i) { return d.x; })
       .classed('node', true)
-      .classed('visited', d => visited.includes(d.id));
+      .classed('visited', d => visited.includes(d.id))
+      .classed('source', d => d.id === source)
+      .classed('target', d => d.id === target);
 }
 
 function clearGraph() {

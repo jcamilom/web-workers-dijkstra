@@ -27,6 +27,12 @@ body {
 .node.visited {
   fill: #338bff;
 }
+.node.source {
+  fill: #ffa732;
+}
+.node.target {
+  fill: #ff4133;
+}
 .link {
   stroke: #e8e6e3;
   stroke-width: 1.5px;

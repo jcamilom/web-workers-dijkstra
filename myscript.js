@@ -63,14 +63,14 @@ function updateNodes() {
       .attr('cy', function (d, i) { return d.y; })
       .attr('cx', function (d, i) { return d.x; })
       .classed('node', true)
-      .classed('visited', d => visited.includes(d.id))
+      .classed('visited', d => visited.has(d.id))
       .classed('source', d => d.id === source)
       .classed('target', d => d.id === target);
 }
 
 function clearGraph() {
   shortestPath = [];
-  visited = [];
+  visited = new Set();
 }
 
 function getRandomInt(min, max) {
@@ -141,7 +141,7 @@ if (window.Worker) {
   dijkstraWorker.onmessage = function(e) {
     const { data } = e;
     if (data.id === 'added') {
-      visited = data.visited;
+      visited.add(data.newVisited);
       updateNodes();
     } else if (data.id === 'finished') {
       shortestPath = data.path;

@@ -89,7 +89,7 @@ function dijkstra(graph, source, target) {
     visited.push(u);
     postMessage({
       id: 'added',
-      visited,
+      newVisited: u,
     });
     const idxToRemove = unvisited.findIndex(v => v === u);
     unvisited.splice(idxToRemove, 1);

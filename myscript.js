@@ -1,6 +1,6 @@
 let gridSize = 30;
 let width, height;
-let nNodes, rawGraph, nodes, links, source, target, shortestPath, visited, graph;
+let nNodes, rawGraph, nodes, links, source, target, shortestPath, graph, processActive;
 
 nNodes = gridSize * gridSize;
 source = getRandomInt(0, nNodes - 1);
@@ -63,14 +63,18 @@ function updateNodes() {
       .attr('cy', function (d, i) { return d.y; })
       .attr('cx', function (d, i) { return d.x; })
       .classed('node', true)
-      .classed('visited', d => visited.includes(d.id))
+      .classed('visited', d => d.visited)
       .classed('source', d => d.id === source)
       .classed('target', d => d.id === target);
 }
 
 function clearGraph() {
   shortestPath = [];
-  visited = [];
+  graph.nodes.forEach(node => (node.visited = false));
+}
+
+function markNodeAsVisited(nodeId) {
+  graph.nodes[nodeId].visited = true;
 }
 
 function getRandomInt(min, max) {
@@ -89,8 +93,9 @@ function setInputsValue(source, target, gridSize) {
 }
 
 function setLoader(state) {
+  processActive = state;
   const spinner = document.getElementById('spinner');
-  const action = state ? 'add' : 'remove';
+  const action = processActive ? 'add' : 'remove';
   spinner.classList[action]('show');
 }
 
@@ -101,12 +106,16 @@ clearGraph();
 updateGraph();
 
 if (window.Worker) {
-  const dijkstraWorker = new Worker('dijkstra.js');
+  let dijkstraWorker;
 
   const form = document.getElementById('form');
 
   form.onsubmit = function(e) {
-    e.preventDefault()
+    e.preventDefault();
+    if (processActive) {
+      dijkstraWorker.terminate();
+      createWorker();
+    }
     setLoader(true);
     const sorceInput = document.getElementById('sourceInput');
     const targetInput = document.getElementById('targetInput');
@@ -138,20 +147,25 @@ if (window.Worker) {
     dijkstraWorker.postMessage([rawGraph, source, target]);
   }
 
-  dijkstraWorker.onmessage = function(e) {
-    const { data } = e;
-    if (data.id === 'added') {
-      visited = data.visited;
-      updateNodes();
-    } else if (data.id === 'finished') {
-      shortestPath = data.path;
-      updateGraph();
-      setLoader(false);
-    }
-  }
+  createWorker();
 
   setLoader(true);
   dijkstraWorker.postMessage([rawGraph, source, target]);
+
+  function createWorker () {
+    dijkstraWorker = new Worker('dijkstra.js');
+    dijkstraWorker.onmessage = function(e) {
+      const { data } = e;
+      if (data.id === 'added') {
+        markNodeAsVisited(data.newVisited);
+        updateNodes();
+      } else if (data.id === 'finished') {
+        shortestPath = data.path;
+        updateGraph();
+        setLoader(false);
+      }
+    }
+  }
 
 } else {
   console.log('Your browser doesn\'t support web workers.');

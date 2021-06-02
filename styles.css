@@ -1,6 +1,7 @@
 body {
   background-color: #181a1b;
   margin: 0;
+  color: #e8e6e3;
 }
 .container {
   display: flex;
@@ -10,10 +11,17 @@ body {
 }
 .container > form {
   display: flex;
-  align-items: center;
+  align-items: end;
   flex-wrap: wrap;
   min-height: 50px;
   margin: 15px;
+}
+.container > form > * {
+  max-width: 100px;
+  margin-right: 15px;
+}
+label > input {
+  max-width: 100%;
 }
 .container > svg {
   width: 100%;
@@ -41,7 +49,10 @@ body {
   stroke: #ffa732;
   stroke-width: 5px;
 }
-
+.spinner-container {
+  width: 40px;
+  height: 40px;
+}
 .lds-spinner {
   color: official;
   position: relative;

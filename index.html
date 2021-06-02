@@ -11,11 +11,13 @@
 <body>
   <div class="container">
     <form id="form">
-      <label>Source: <input type="number" id="sourceInput"></label>
-      <label>Target: <input type="number" id="targetInput"></label>
-      <label>Grid size: <input type="number" id="sizeInput"></label>
+      <label>Source:<br><input type="number" id="sourceInput"></label>
+      <label>Target:<br><input type="number" id="targetInput"></label>
+      <label>Grid size:<br><input type="number" id="sizeInput"></label>
       <button role="submit">Find!</button>
-      <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div class="spinner-container">
+        <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
     </form>
     <svg class="svg"></svg>
   </div>

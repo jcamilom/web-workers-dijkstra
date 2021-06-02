@@ -68,6 +68,24 @@ function updateNodes() {
       .classed('target', d => d.id === target);
 }
 
+function updateVisitedNodes() {
+  d3.select('.svg')
+    .select('g')
+    .selectAll('.node')
+    .data(graph.nodes)
+    .join(
+      enter => enter.append('circle')
+        .attr('r', 10)
+        .attr('cy', function (d, i) { return d.y; })
+        .attr('cx', function (d, i) { return d.x; })
+        .classed('node', true)
+        .classed('source', d => d.id === source)
+        .classed('target', d => d.id === target),
+      update => update
+        .classed('visited', d => d.visited)
+    )
+}
+
 function clearGraph() {
   shortestPath = [];
   graph.nodes.forEach(node => (node.visited = false));
@@ -158,7 +176,7 @@ if (window.Worker) {
       const { data } = e;
       if (data.id === 'added') {
         markNodeAsVisited(data.newVisited);
-        updateNodes();
+        updateVisitedNodes();
       } else if (data.id === 'finished') {
         shortestPath = data.path;
         updateGraph();

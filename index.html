@@ -11,12 +11,16 @@
 <body>
   <div class="container">
     <form id="form">
-      <label>Source:<br><input type="number" id="sourceInput"></label>
-      <label>Target:<br><input type="number" id="targetInput"></label>
-      <label>Grid size:<br><input type="number" id="sizeInput"></label>
-      <button role="submit">Find!</button>
-      <div class="spinner-container">
-        <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div class="form-row">
+        <label>Source node:<input type="number" id="sourceInput"></label>
+        <label>Target node:<input type="number" id="targetInput"></label>
+      </div>
+      <div class="form-row">
+        <label>Grid size:<input type="number" id="sizeInput"></label>
+        <button role="submit">Find!</button>
+        <div class="spinner-container">
+          <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
       </div>
     </form>
     <svg class="svg"></svg>

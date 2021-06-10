@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
 body {
   background-color: #181a1b;
   margin: 0;
@@ -30,6 +37,7 @@ form .form-row > * + * {
 }
 label > input {
   max-width: 100%;
+  font-size: 0.9rem;
 }
 .container > svg {
   width: 100%;
@@ -145,8 +153,15 @@ label > input {
   }
 }
 @media only screen and (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
   .container {
+    height: 100vh;
     flex-direction: row;
     justify-content: center;
+  }
+  form .form-row label {
+    max-width: 120px;
   }
 }

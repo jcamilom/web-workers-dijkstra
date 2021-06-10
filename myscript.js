@@ -105,8 +105,8 @@ function setInputsValue(source, target, gridSize) {
   const sorceInnput = document.getElementById('sourceInput');
   const targetInnput = document.getElementById('targetInput');
   const sizeInnput = document.getElementById('sizeInput');
-  sorceInnput.value = source;
-  targetInnput.value = target;
+  sorceInnput.value = source + 1;
+  targetInnput.value = target + 1;
   sizeInnput.value = gridSize;
 }
 
@@ -138,8 +138,8 @@ if (window.Worker) {
     const sorceInput = document.getElementById('sourceInput');
     const targetInput = document.getElementById('targetInput');
     const sizeInput = document.getElementById('sizeInput');
-    const sourceValue = +sorceInput.value;
-    const targetValue = +targetInput.value;
+    const sourceValue = +sorceInput.value - 1;
+    const targetValue = +targetInput.value - 1;
     const sizeValue = +sizeInput.value;
     if (sizeValue !== gridSize) {
       gridSize = sizeValue;

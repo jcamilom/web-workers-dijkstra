@@ -33,6 +33,18 @@ label {
   color: #7D8599;
   font-size: 0.8rem;
 }
+button {
+  border: none;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #1D5EFF;
+  padding: 5px;
+  border-radius: 5px;
+}
+button:hover {
+  background-color: #338bff;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -64,6 +76,14 @@ form .form-row > * + * {
 }
 label > input {
   max-width: 100%;
+}
+form .form-row .button-container {
+  display: flex;
+  align-items: flex-end;
+}
+form .form-row .button-container button {
+  width: 50px;
+  margin-right: 10px;
 }
 .container > svg {
   width: 100%;
@@ -183,6 +203,9 @@ label > input {
     font-size: 18px;
   }
   input[type=number] {
+    padding: 7px;
+  }
+  button {
     padding: 7px;
   }
   .container {

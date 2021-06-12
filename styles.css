@@ -6,9 +6,32 @@ html {
   font-family: Arial, sans-serif;
 }
 body {
-  background-color: #181a1b;
+  background-color: #22242A;
   margin: 0;
-  color: #e8e6e3;
+}
+input {
+  font-size: 0.9rem;
+  color: #FFFFFF;
+  background-color: #323741;
+  border: 1px solid #656C79;
+  padding: 5px;
+  border-radius: 5px;
+}
+input:focus {
+  border-color: #338bff;
+}
+input[type=number] {
+  outline: none;
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+label {
+  color: #7D8599;
+  font-size: 0.8rem;
 }
 .container {
   display: flex;
@@ -23,7 +46,7 @@ form {
 }
 form .form-row {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 form .form-row + .form-row {
   margin-top: 15px;
@@ -32,12 +55,15 @@ form .form-row label {
   display: inline-block;
   max-width: 100px;
 }
+form .form-row label > span {
+  display: block;
+  margin-bottom: 3px;
+}
 form .form-row > * + * {
   margin-left: 25px;
 }
 label > input {
   max-width: 100%;
-  font-size: 0.9rem;
 }
 .container > svg {
   width: 100%;
@@ -156,6 +182,9 @@ label > input {
   html {
     font-size: 18px;
   }
+  input[type=number] {
+    padding: 7px;
+  }
   .container {
     height: 100vh;
     flex-direction: row;
@@ -163,5 +192,8 @@ label > input {
   }
   form .form-row label {
     max-width: 120px;
+  }
+  form .form-row label > span {
+    margin-bottom: 5px;
   }
 }

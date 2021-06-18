@@ -4,6 +4,7 @@
 html {
   font-size: 16px;
   font-family: Arial, sans-serif;
+  color: #7D8599;
 }
 body {
   background-color: #22242A;
@@ -30,7 +31,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 label {
-  color: #7D8599;
   font-size: 0.8rem;
 }
 button {
@@ -84,6 +84,21 @@ form .form-row .button-container {
 form .form-row .button-container button {
   width: 50px;
   margin-right: 10px;
+}
+footer {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: underline;
 }
 .container > svg {
   width: 100%;

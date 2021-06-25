@@ -51,10 +51,17 @@ button:hover {
   align-items: center;
   padding: 10px;
 }
+.page-info {
+  max-width: 360px;
+}
+p {
+  font-size: 0.8rem;
+}
 form {
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  align-items: center;
+  margin: 15px 0;
 }
 form .form-row {
   display: flex;
@@ -103,6 +110,7 @@ a:hover {
 .container > svg {
   width: 100%;
   max-width: 600px;
+  margin: 15px 0 0;
 }
 .node {
   fill: #c8c3bc;
@@ -228,10 +236,16 @@ a:hover {
     flex-direction: row;
     justify-content: center;
   }
+  form {
+    align-items: flex-start;
+  }
   form .form-row label {
     max-width: 120px;
   }
   form .form-row label > span {
     margin-bottom: 5px;
+  }
+  .container > svg {
+    margin: 0 0 0 25px;
   }
 }

@@ -10,30 +10,36 @@
 </head>
 <body>
   <div class="container">
-    <form id="form">
-      <div class="form-row">
-        <label>
-          <span>Source node</span>
-          <input type="number" id="sourceInput">
-        </label>
-        <label>
-          <span>Target node</span>
-          <input type="number" id="targetInput">
-        </label>
+    <div>
+      <div class="page-info">
+        <h3>Dijkstra Visualization</h3>
+        <p>This is a visualization tool for showing the solving process of the "Shortest Path Problem" using the Dijkstra's algorithm.</p>
       </div>
-      <div class="form-row">
-        <label>
-          <span>Grid size</span>
-          <input type="number" id="sizeInput">
-        </label>
-        <div class="button-container">
-          <button role="submit">Find!</button>
-          <div class="spinner-container">
-            <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <form id="form">
+        <div class="form-row">
+          <label>
+            <span>Source node</span>
+            <input type="number" id="sourceInput">
+          </label>
+          <label>
+            <span>Target node</span>
+            <input type="number" id="targetInput">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>
+            <span>Grid size</span>
+            <input type="number" id="sizeInput">
+          </label>
+          <div class="button-container">
+            <button role="submit">Find!</button>
+            <div class="spinner-container">
+              <div id="spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <svg class="svg"></svg>
   </div>
   <footer>&#127279; <a href="https://dev.to/jcamilom" target="_blank">Camilo Muñoz</a></footer>

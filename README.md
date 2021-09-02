@@ -2,9 +2,11 @@
 
 This is a visualization tool for showing the solving process of the "Shortest Path Problem" using the Dijkstra's algorithm.
 
+![preview](https://github.com/jcamilom/web-workers-dijkstra/blob/master/images/preview.png?raw=true)
+
 ## Usage
 
-Choose a `SourceNode` and a `TargetNode` from the inputs and then hit the **find!** button and see how the algorithm searches the shortest path between the two nodes.
+Choose a `SourceNode` and a `TargetNode` from the inputs, then hit the **find!** button and see how the algorithm searches the shortest path between the two nodes.
 
 The graph is based on a square matrix, where the first node is at the upper left corner and the last node (`GridSize²`) at the bottom right.
 
@@ -17,3 +19,5 @@ The Dijkstra's algorithm then finds the shortest path between the two selected n
 ## Technologies used
 
 Made with pure js, html and css. The graph is powered by [D3.js](https://d3js.org/).
+
+Javascript WebWorkers are used to avoid the rendering thread to be blocked by the algorithm computations.

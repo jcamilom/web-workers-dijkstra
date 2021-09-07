@@ -155,6 +155,7 @@ if (window.Worker) {
       }
     } else if ((sourceValue < 0 || sourceValue >= nNodes) || (targetValue < 0 || targetValue >= nNodes)) {
       setInputsValue(source, target, gridSize);
+      setLoader(false);
       return;
     } else {
       source = sourceValue;

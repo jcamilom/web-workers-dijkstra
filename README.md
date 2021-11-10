@@ -2,6 +2,8 @@
 
 This is a visualization tool for showing the solving process of the "Shortest Path Problem" using the Dijkstra's algorithm.
 
+See the demo [here](https://jcamilom.github.io/web-workers-dijkstra/).
+
 ![preview](https://github.com/jcamilom/web-workers-dijkstra/blob/master/images/preview.png?raw=true)
 
 ## Usage
